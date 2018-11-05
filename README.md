@@ -52,3 +52,17 @@ After starting the Localstack, follow the below steps:
 
 {"CAR":14,"TRAIN":150,"FLIGHT":24}
 
+### For different partners
+In order to create the summary for different partners.
+#### Step 1
+Change the partner id in the application.properties
+```
+cd CodingChallenge/
+vi src/main/resources/application.properties
+```
+Change the `result_key` to different partner id. (For eg), `summary/2/result`
+
+(P.s) Partner id for simplicity hard-coded in the application.properties.
+
+#### Step 2
+Make changes to the key when copying the data.json to the s3. (For e.g) aws --endpoint-url=http://localhost:4572 s3 cp data.json s3://bonial-transport/records/`2`/
