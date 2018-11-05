@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    TransportManager
+
+    Calculate total number of passengers for each transport type.
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+    Function:
+        Timeout: 20
+
+
+Resources:
+
+    TransportHandlerFunction:
+        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+        Properties:
+            CodeUri: target/TransportManager-1.0.jar
+            Handler: de.bonial.transportmanager.TransportRequestHandler::handleRequest
+            Runtime: java8
+            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                Variables:
+                    PARAM1: VALUE
+            Events:
+                S3Event:
+                     Type: S3
+                     Properties:
+                        Bucket: !Ref SrcBucket
+                        Events: s3:ObjectCreated:*
+    SrcBucket:
+        Type: AWS::S3::Bucket
