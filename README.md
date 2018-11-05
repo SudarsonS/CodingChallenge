@@ -66,3 +66,5 @@ Change the `result_key` to different partner id. (For eg), `summary/2/result`
 
 #### Step 2
 Make changes to the key when copying the data.json to the s3. (For e.g) aws --endpoint-url=http://localhost:4572 s3 cp data.json s3://bonial-transport/records/`2`/
+
+Other steps are similar as mentioned above.
